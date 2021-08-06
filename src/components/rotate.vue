@@ -1,29 +1,96 @@
 <template>
   <div id="mainBox1">
-    <div id="box1"></div>
-    <div id="box2">
+    <div id="rotatebox1"></div>
+    <div id="rotatebox2">
       <img src="../assets/pie.png" alt="旋转的图片" class="tp" />
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "rotate",
   data() {
-    return {};
+    return {
+      arrayData: [
+        {
+          value: 1,
+          name: "五级警告",
+        },
+
+        {
+          value: 3,
+          name: "四级警告",
+        },
+
+        {
+          value: 5,
+          name: "三级警告",
+        },
+
+        {
+          value: 43,
+          name: "二级警告",
+        },
+      ],
+
+    };
   },
   methods: {
-    m1() {
-      let myRotate = this.$echarts.init(document.getElementById("box1"));
+    //直接传入拿到的数组进入m1（）函数，即可显示效果
+    m1(arr: any[]): void{
+      let myRotate = this.$echarts.init(document.getElementById("rotatebox1"));
       let hcolor = [
-        "#d61616",
-        "#00f948",
-        "#12b4ff",
-        "#fef119",
-        "#ff5b00",
-        "#ffaf00",
+        "#fef119",  //yellow 黄
+        "#12b4ff",  //wathet 浅蓝
+        "#00f948",  //green 绿
+        "#d61616", // red 红
+        "#ff5b00",  //tangerine 橘红
+        "#ffaf00",  //orange 橘黄
       ];
+      let mydata = arr;
+      let mydata2 = [];
+      let count = 0;
+      for(let i = 0; i < mydata.length; i++){
+        count += mydata[i].value;
+      }
+      for (let i = 0; i < mydata.length; i++) {
+        
+
+        mydata[i].itemStyle = {
+          shadowColor: hcolor[i],
+        };
+        // console.log(mydata);
+        mydata[i].label = {
+          formatter:
+            mydata[i].name +
+            ":" +
+            mydata[i].value +
+            "\n" +
+            "占比:" +
+            ((mydata[i].value / count) * 100).toFixed(0) +
+            "%",
+        };
+        mydata2.push(mydata[i]);
+        mydata2.push({
+          value: 1,
+          name: "",
+          itemStyle: {
+            color: "rgba(0,0,0,0)",
+          },
+          tooltip: {
+            show: false,
+          },
+          labelLine: {
+            lineStyle: {
+              color: "rgba(0,0,0,0)",
+            },
+          },
+        });
+      }
+
+      // console.log(mydata2);
+      // console.log(mydata);
       let option = {
         color: hcolor,
         tooltip: {
@@ -32,7 +99,7 @@ export default {
         title: {
           zlevel: 0,
           text: "总数",
-          subtext: 100,
+          subtext: count || 0,
           textStyle: {
             color: "#00b5f3",
             fontSize: 12,
@@ -47,26 +114,25 @@ export default {
           x: "center",
           y: "center",
         },
-        toolbox: {
-          show: true,
-        },
-
         series: [
           {
             name: "警告",
             type: "pie",
-            radius: ["60%", "65%"],
+            radius: ["59%", "65%"],
             avoidLabelOverlap: true,
 
             itemStyle: {
-              borderRadius: 20,
-              shadowBlur: 30,
-              label: true,
+              borderRadius: 50,
+              borderWidth: 0,
+              shadowBlur: 10,
             },
             label: {
               show: true,
               position: "outside",
               color: "#f4fff7",
+              // formatter: function(mydata) {
+              //   return ["ssadsa","fasdfds","dsadsa","sadwawd"]
+              // },
             },
             emphasis: {
               label: {
@@ -84,109 +150,7 @@ export default {
               length: 20,
               length2: 20,
             },
-
-            data: [
-              {
-                value: 5,
-                name: "五级警告",
-                itemStyle: {
-                  shadowColor: hcolor[0],
-                },
-                label: {
-                  formatter: "五级警告" + ":" + 5 + "\n   占比5%",
-                },
-              },
-              {
-                value: 2,
-                name: "",
-                itemStyle: {
-                  color: "rgba(0,0,0,0)",
-                },
-                tooltip: {
-                  show: false,
-                },
-                labelLine: {
-                  lineStyle: {
-                    color: "rgba(0,0,0,0)",
-                  },
-                },
-              },
-              {
-                value: 10,
-                name: "四级警告",
-                itemStyle: {
-                  shadowColor: hcolor[1],
-                },
-                label: {
-                  formatter: "四级警告" + ":" + 10 + "\n   占比10%",
-                },
-              },
-              {
-                value: 2,
-                name: "",
-                itemStyle: {
-                  color: "rgba(0,0,0,0)",
-                },
-                tooltip: {
-                  show: false,
-                },
-                labelLine: {
-                  lineStyle: {
-                    color: "rgba(0,0,0,0)",
-                  },
-                },
-              },
-              {
-                value: 20,
-                name: "三级警告",
-                itemStyle: {
-                  shadowColor: hcolor[2],
-                },
-                label: {
-                  formatter: "三级警告" + ":" + 20 + "\n   占比20%",
-                },
-              },
-              {
-                value: 2,
-                name: "",
-                itemStyle: {
-                  color: "rgba(0,0,0,0)",
-                },
-                tooltip: {
-                  show: false,
-                },
-                labelLine: {
-                  lineStyle: {
-                    color: "rgba(0,0,0,0)",
-                  },
-                },
-              },
-              {
-                value: 65,
-                name: "二级警告",
-                itemStyle: {
-                  shadowColor: hcolor[3],
-                },
-                label: {
-                  formatter: "二级警告" + ":" + 65 + "\n   占比65%",
-                },
-              },
-              {
-                value: 2,
-                name: "",
-                itemStyle: {
-                  color: "rgba(0,0,0,0)",
-                },
-                tooltip: {
-                  show: false,
-                },
-                labelLine: {
-                  lineStyle: {
-                    color: "rgba(0,0,0,0)",
-                  },
-                },
-              },
-            ],
+            data: mydata2,
           },
         ],
       };
@@ -194,13 +158,13 @@ export default {
     },
   },
   mounted() {
-    this.m1();
+    this.m1(this.arrayData);
   },
 };
 </script>
 
 <style scoped>
-@-webkit-keyframes rotation {
+@keyframes rotation {
   from {
     -webkit-transform: rotate(0deg);
   }
@@ -213,7 +177,7 @@ export default {
 /* 兼容不同版本浏览器 */
 /* 3s 为转速 值越小 速度越快 */
 .tp {
-  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
 
   animation: rotation 3s linear infinite;
 
@@ -224,22 +188,24 @@ export default {
   -o-animation: rotation 3s linear infinite;
 }
 #mainBox1 {
-    position: relative; 
+  position: relative;
+  width: 426px;
+  height: 222px;
 }
-#box1 {
+#rotatebox1 {
   width: 426px;
   height: 222px;
   position: absolute;
   z-index: 1;
 }
-#box2 {
+#rotatebox2 {
   position: absolute;
   z-index: 0;
   top: 60px;
   left: 163px;
 }
-img  {
-    width: 100px;
-    height: auto;
+img {
+  width: 100px;
+  height: auto;
 }
 </style>
