@@ -1,12 +1,15 @@
 <template>
   <div>
-      <dv-percent-pond :config="config1" style="width:200px;height:100px;" />
+      <!-- <dv-percent-pond :config="config1" style="width:200px;height:100px;" />
       <div class="box1">
           <dv-active-ring-chart :config="config" style="width:300px;height:300px" />
           
       </div>
       <div>
           <dv-decoration-9 style="width:150px;height:150px;">66%</dv-decoration-9>
+      </div> -->
+      <div>
+          <dv-water-level-pond :config="config2" style="width:400px;height:200px" />
       </div>
   </div>
 </template>
@@ -49,6 +52,11 @@ export default {
                 value: 5,
                 localGradient: true,
                 textColor: '#0ff'
+            },
+            config2: {
+                data: [40, 0],
+                waveNum: 1,
+                waveHeight: 90
             }
         }
     }

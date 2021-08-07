@@ -5,3 +5,4 @@ declare module '*.vue' {
 
 declare module 'animate.css';
 declare module '@jiaminghi/data-view';
+declare module 'echarts-liquidfill';

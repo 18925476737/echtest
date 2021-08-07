@@ -1,10 +1,10 @@
 <template>
-  <div>
+
     <div id="assetbox1"></div>
-  </div>
+  
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "asset",
   data() {
@@ -23,10 +23,8 @@ export default {
           value: 1438,
           name: "故障",
           itemStyle: {
-
-              borderColor: "#3087d6",
-              color: "#3087d6",
-
+            borderColor: "#3087d6",
+            color: "#3087d6",
           },
         },
 
@@ -34,35 +32,31 @@ export default {
           value: 1438,
           name: "维修",
           itemStyle: {
-
-              borderColor: "#f6ce54",
-              color: "#f6ce54",
- 
+            borderColor: "#f6ce54",
+            color: "#f6ce54",
           },
         },
       ],
     };
   },
   methods: {
-    m1(arrayData) {
-      let myAsset = this.$echarts.init(document.getElementById("assetbox1"));
+    m1(arrayData: any[]): void {
+      let myAsset = this.$echarts.init(document.getElementById("assetbox1"), null, {renderer: 'svg'});   //使用svg渲染
 
-      let mycolor = ["#173852", "#0b2036", "#002e49"];
-      let mydata = ["故障", "维修", "正常"];
-      let mydata2 = arrayData;
-      let mydata3 = [];
-      let count = 0;
-      for (let i = 0; i < mydata2.length; i++) {
+      let mycolor: string[] = ["#173852", "#0b2036", "#002e49"];
+      let mydata: string[] = ["故障", "维修", "正常"];
+      let mydata2: any[] = arrayData;
+      let mydata3: any[] = [];
+      let count: number = 0;
+      for (let i: number = 0; i < mydata2.length; i++) {
         count += mydata2[i].value;
         mydata3.push(mydata2[i], {
           value: 5,
           name: "",
           itemStyle: {
-
-              color: "transparent",
-              borderWidth: 5,
-              borderColor: "transparent",
-
+            color: "transparent",
+            borderWidth: 5,
+            borderColor: "transparent",
           },
           tooltip: {
             show: !1,
@@ -101,7 +95,7 @@ export default {
           itemGap: 20,
           itemWidth: 15,
           itemHeight: 8,
-          formatter: (mydata) => {
+          formatter: (mydata: any[]): string => {
             for (let i = 0; i < mydata2.length; i++) {
               //   console.log(mydata);
               if (mydata2[i].name == mydata) {

@@ -5,6 +5,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import animate from 'animate.css'
 import dataV from '@jiaminghi/data-view'
 import * as echarts from 'echarts';
+import  "echarts-liquidfill";
 
 Vue.config.productionTip = false
 

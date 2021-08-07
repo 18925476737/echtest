@@ -2,10 +2,12 @@
   <div id="app">
     <div id="rotate">
       <rotate />
-      
     </div>
     <div>
       <asset />
+    </div>
+    <div >
+      <wave />
     </div>
   </div>
 </template>
@@ -18,7 +20,8 @@ import animateTest from "./components/animateTest.vue";
 import dataVTest from "./components/dataVTest.vue";
 import echartsTest from "./components/echartsTest.vue";
 import rotate from "./components/rotate.vue";
-import asset from "./components/asset.vue"
+import asset from "./components/asset.vue";
+import wave from "./components/wave.vue"
 
 export default Vue.extend({
   name: "App",
@@ -29,7 +32,8 @@ export default Vue.extend({
     dataVTest,
     echartsTest,
     rotate,
-    asset
+    asset,
+    wave,
   },
 });
 </script>
@@ -57,7 +61,6 @@ body {
   height: 100vh;
 }
 #rotate {
-  width: 426px;
   height: 222px;
   position: flex;
 }

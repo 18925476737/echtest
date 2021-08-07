@@ -10,6 +10,7 @@
     "@jiaminghi/data-view": "^2.10.0",
     "animate.css": "^4.1.1",
     "echarts": "^5.1.2",
+    "echarts-liquidfill": "^3.0.0",
     "element-ui": "^2.15.3",
     "vue": "^2.6.11"
   },
